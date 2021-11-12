@@ -1,0 +1,23 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: postgres-to-azureblob
+spec:
+  schedule: "0 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          annotations:
+            kubectl.kubernetes.io/default-container: app
+        spec:
+          containers:
+          - name: app
+            image: ghcr.io/binkhq/postgres-to-azureblob:latest
+            imagePullPolicy: Always
+            env:
+            - name: blob_storage_connection_string
+            - name: blob_storage_container
+            - name: blob_storage_path_prefix
+            - name: psql_connection_string
+          restartPolicy: Never
