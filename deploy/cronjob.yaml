@@ -3,6 +3,9 @@ kind: CronJob
 metadata:
   name: postgres-to-azureblob
 spec:
+  concurrencyPolicy: Forbid
+  failedJobsHistoryLimit: 1
+  successfulJobsHistoryLimit: 1
   schedule: "0 * * * *"
   jobTemplate:
     spec:

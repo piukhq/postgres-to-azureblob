@@ -39,7 +39,6 @@ def upload_blob(filename: str, date: datetime) -> None:
     blob = client.get_blob_client(container=settings.blob_storage_container, blob=blobname)
     with open(filename, "rb") as f:
         blob.upload_blob(f)
-    cleanup(filename)
     return None
 
 
@@ -76,4 +75,4 @@ if __name__ == "__main__":
     dump = dump_database()
     if dump is not None:
         upload_blob(filename=dump.get("filename"), date=dump.get("date"))
-    cleanup(filename=dump.get("filename"))
+        cleanup(filename=dump.get("filename"))
