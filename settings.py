@@ -10,6 +10,8 @@ class Settings(BaseSettings):
     retry_count: int = 3
     retry_delay: int = 5
     blob_storage_path_prefix: Optional[str]
+    leader_election_enabled: bool = False
+    redis_url: Optional[str]
 
 
 settings = Settings()

@@ -7,6 +7,7 @@ name = "pypi"
 azure-storage-blob = "*"
 python-json-logger = "*"
 pydantic = "*"
+redis = "*"
 
 [dev-packages]
 black = "==21.10b0"
