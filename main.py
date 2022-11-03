@@ -68,10 +68,14 @@ def upload_blob(filename: str, date: datetime) -> None:
 
 
 def dump_database() -> Union[dict, None]:
+    if settings.psql_database_name:
+        psql_connection_string = settings.psql_connection_string.format(settings.psql_database_name)
+    else:
+        psql_connection_string = settings.psql_connection_string
     date = datetime.utcnow()
-    database_name = urlparse(settings.psql_connection_string).path[1:]
+    database_name = urlparse(psql_connection_string).path[1:]
     filename = f"/tmp/{date.strftime('%FT%H%M%SZ')}-{database_name}.psql"
-    command = ["pg_dump", "--format=custom", settings.psql_connection_string]
+    command = ["pg_dump", "--format=custom", psql_connection_string]
     if is_leader(dbname=database_name):
         for i in range(settings.retry_count):
             with open(filename, "wb") as f:
