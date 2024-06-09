@@ -10,7 +10,7 @@ pydantic = "*"
 redis = "*"
 
 [dev-packages]
-black = "==21.10b0"
+black = "==24.3.0"
 flake8 = "*"
 ptpython = "*"
 isort = "*"
